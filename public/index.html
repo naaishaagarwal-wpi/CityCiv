@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enter Your Name</title>
+</head>
+<body>
+  <input id="nameInput" placeholder="Enter your name" />
+  <button onclick="saveName()">Continue</button>
+
+  <script>
+    function saveName() {
+      const name = document.getElementById("nameInput").value.trim()
+      if (!name) return
+
+      fetch("/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+      })
+      .then(() => {
+        localStorage.setItem("username", name)
+        window.location = "/feed.html"
+      })
+    }
+  </script>
+</body>
+</html>

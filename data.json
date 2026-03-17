@@ -1,0 +1,36 @@
+{
+  "users": [
+    "Naaisha",
+    "Aishani"
+  ],
+  "posts": [
+    {
+      "id": 4,
+      "username": "Aishani",
+      "content": "Hi",
+      "likes": 2,
+      "comments": []
+    },
+    {
+      "id": 3,
+      "username": "Naaisha",
+      "content": "hello",
+      "likes": 1,
+      "comments": []
+    },
+    {
+      "id": 2,
+      "username": "Naaisha",
+      "content": "hi",
+      "likes": 1,
+      "comments": []
+    },
+    {
+      "id": 1,
+      "username": "Naaisha",
+      "content": "hi",
+      "likes": 0,
+      "comments": []
+    }
+  ]
+}
