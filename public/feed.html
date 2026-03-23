@@ -8,10 +8,38 @@
   <h1>Welcome <span id="nameDisplay"></span></h1>
   <button onclick="signOut()">Sign Out</button>
 
-  <input id="postInput" placeholder="Write your post" />
-  <button onclick="addPost()">Post</button>
+  <button onclick="openModal()">➕ Create Post</button>
 
   <div id="posts"></div>
+
+  <div id="postModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+
+    <div style="background:white; padding:20px; margin:100px auto; width:300px;">
+      <h3>Create Post</h3>
+  
+      <textarea id="modalPostInput" placeholder="Write your post"></textarea>
+  
+      <br><br>
+  
+      <select id="categoryInput">
+        <option value="General">General</option>
+        <option value="Events">Events</option>
+        <option value="Announcements">Announcements</option>
+      </select>
+  
+      <br><br>
+  
+      <input type="file" id="imageInput" />
+  
+      <br><br>
+  
+      <button onclick="submitPost()">Post</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  
+  </div>
+
+  <button onclick="goHome()">Home</button>
 
   <script src="script.js"></script>
 </body>

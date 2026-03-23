@@ -52,4 +52,16 @@ function signOut() {
   window.location = "/"
 }
 
+function goHome() {
+  window.location = "/home.html"
+}
+
 getPosts()
+
+function openModal() {
+  document.getElementById("postModal").style.display = "block"
+}
+
+function closeModal() {
+  document.getElementById("postModal").style.display = "none"
+}
