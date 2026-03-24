@@ -8,6 +8,86 @@
   ],
   "posts": [
     {
+      "id": 20,
+      "username": "Naaisha",
+      "content": "super",
+      "category": "Events",
+      "likes": 0,
+      "comments": [],
+      "image": "a3c88c51bf054cfa162333896119638c"
+    },
+    {
+      "id": 19,
+      "username": "Naaisha",
+      "content": "new",
+      "category": "Events",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 18,
+      "username": "Naaisha",
+      "content": "hello",
+      "category": "Events",
+      "likes": 0,
+      "comments": [],
+      "image": "51180ba5fcc4f3cfbef9c087398f07c8"
+    },
+    {
+      "id": 17,
+      "username": "Naaisha",
+      "content": "yay",
+      "category": "Events",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 16,
+      "username": "Naaisha",
+      "content": "hello",
+      "category": "General",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 15,
+      "username": "Naaisha",
+      "content": "post",
+      "category": "General",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 14,
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 13,
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 12,
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 11,
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 10,
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": 9,
+      "likes": 1,
+      "comments": []
+    },
+    {
       "id": 8,
       "username": "aishani",
       "content": "hey",
@@ -39,7 +119,7 @@
       "id": 4,
       "username": "Aishani",
       "content": "Hi",
-      "likes": 3,
+      "likes": 5,
       "comments": []
     },
     {
