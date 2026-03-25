@@ -1,3 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 <button onclick="goHome()">Home</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account</title>
+  <script type="text/javascript" src="account.js" defer></script>
+</head>
 
-<script src="home.js"></script>
+<body>
+    <div class="wrapper">
+        <h1>👤 Signup</h1>
+        <form id="signup-form">
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <div>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+    </div>
+</body>
+</html>
