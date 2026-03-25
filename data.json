@@ -12,26 +12,29 @@
       "username": "Naaisha",
       "content": "tester",
       "category": "Announcements",
-      "likes": 0,
+      "likes": 22,
       "comments": [],
-      "image": "4896a601bf8d59ac52461e28ecf49f78"
+      "image": "4896a601bf8d59ac52461e28ecf49f78",
+      "likedBy": []
     },
     {
       "id": 20,
       "username": "Naaisha",
       "content": "super",
       "category": "Events",
-      "likes": 0,
+      "likes": 5,
       "comments": [],
-      "image": "a3c88c51bf054cfa162333896119638c"
+      "image": "a3c88c51bf054cfa162333896119638c",
+      "likedBy": []
     },
     {
       "id": 19,
       "username": "Naaisha",
       "content": "new",
       "category": "Events",
-      "likes": 0,
-      "comments": []
+      "likes": 8,
+      "comments": [],
+      "likedBy": []
     },
     {
       "id": 18,
@@ -136,7 +139,8 @@
       "username": "Naaisha",
       "content": "hello",
       "likes": 1,
-      "comments": []
+      "comments": [],
+      "likedBy": []
     },
     {
       "id": 2,

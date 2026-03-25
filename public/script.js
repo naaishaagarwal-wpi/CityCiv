@@ -7,37 +7,57 @@ if (!username) {
 document.getElementById("nameDisplay").textContent = username
 
 async function getPosts() {
-  const res = await fetch("/posts")
-  const posts = await res.json()
+  const res = await fetch("/posts");
+  const posts = await res.json();
 
-  const container = document.getElementById("posts")
-  container.innerHTML = ""
+  const container = document.getElementById("posts");
+  container.innerHTML = "";
 
   posts.forEach(post => {
-    const div = document.createElement("div")
-    div.className = "post-card"
+    // Ensure likedBy exists
+    if (!post.likedBy) post.likedBy = [];
+
+    const userLiked = post.likedBy.includes(username);
+
+    const div = document.createElement("div");
+    div.className = "post-card";
     div.innerHTML = `
       <div class="post-header">
-        <strong>${post.username}</strong>
+        <strong>${post.username || "Unknown"}</strong>
         <span class="post-category">${post.category || "General"}</span>
       </div>
-      <p class="post-content">${post.content}</p>
+      <p class="post-content">${post.content || ""}</p>
       ${post.image ? `<img class="post-image" src="/uploads/${post.image}" alt="Post image" />` : ""}
       <div class="post-footer">
-        <span>Likes: ${post.likes}</span>
-        <button onclick="likePost(${post.id})">❤️ Like</button>
+        <span>Likes: <span id="like-count-${post.id}">${post.likes || 0}</span></span>
+        <button id="like-btn-${post.id}" onclick="likePost(${post.id})">
+          ${userLiked ? "❤️" : "🤍"}
+        </button>
       </div>
-    `
-    container.appendChild(div)
-  })
+    `;
+    container.appendChild(div);
+  });
 }
 
-
 async function likePost(postId) {
-  await fetch(`/posts/${postId}/like`, {
-    method: "POST"
-  })
-  getPosts()
+  try {
+    const res = await fetch(`/posts/${postId}/like`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username })
+    });
+
+    if (!res.ok) throw new Error("Failed to toggle like");
+
+    const updatedPost = await res.json();
+
+    // update UI
+    document.getElementById(`like-count-${postId}`).textContent = updatedPost.likes;
+    document.getElementById(`like-btn-${postId}`).textContent = updatedPost.likedBy.includes(username) ? "❤️" : "🤍";
+
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function signOut() {

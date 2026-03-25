@@ -37,6 +37,9 @@ app.post("/user", (req, res) => {
 // Get posts
 app.get("/posts", (req, res) => {
   const db = readData()
+  db.posts.forEach(p => {
+    if (!p.likedBy) p.likedBy = [];
+  });
   res.json(db.posts)
 })
 
@@ -55,8 +58,9 @@ app.post("/posts", upload.single("image"), (req, res) => {
     content,
     category,
     likes: 0,
+    likedBy: [],
     comments: []
-  }
+  };
 
   if (req.file) {
     newPost.image = req.file.filename
@@ -70,17 +74,28 @@ app.post("/posts", upload.single("image"), (req, res) => {
 
 // Like a post
 app.post("/posts/:id/like", (req, res) => {
-  const db = readData()
-  const post = db.posts.find(p => p.id === parseInt(req.params.id))
+  const { username } = req.body;
+  const db = readData();
+  const post = db.posts.find(p => p.id === parseInt(req.params.id));
 
-  if (post) {
-    post.likes++
-    writeData(db)
-    res.json(post)
+  if (!post) return res.status(404).json({ error: "Post not found" });
+
+  // Ensure likedBy exists
+  if (!post.likedBy) post.likedBy = [];
+
+  if (post.likedBy.includes(username)) {
+    // unlike
+    post.likedBy = post.likedBy.filter(u => u !== username);
+    post.likes = Math.max(0, post.likes - 1);
   } else {
-    res.status(404).json({ error: "Post not found" })
+    // like
+    post.likedBy.push(username);
+    post.likes += 1;
   }
-})
+
+  writeData(db);
+  res.json(post);
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
