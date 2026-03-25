@@ -15,12 +15,18 @@ async function getPosts() {
 
   posts.forEach(post => {
     const div = document.createElement("div")
+    div.className = "post-card"
     div.innerHTML = `
-      <b>${post.username}</b>: ${post.content}
-      <div>Likes: ${post.likes} 
+      <div class="post-header">
+        <strong>${post.username}</strong>
+        <span class="post-category">${post.category || "General"}</span>
+      </div>
+      <p class="post-content">${post.content}</p>
+      ${post.image ? `<img class="post-image" src="/uploads/${post.image}" alt="Post image" />` : ""}
+      <div class="post-footer">
+        <span>Likes: ${post.likes}</span>
         <button onclick="likePost(${post.id})">❤️ Like</button>
       </div>
-      <hr>
     `
     container.appendChild(div)
   })

@@ -8,6 +8,15 @@
   ],
   "posts": [
     {
+      "id": 21,
+      "username": "Naaisha",
+      "content": "tester",
+      "category": "Announcements",
+      "likes": 0,
+      "comments": [],
+      "image": "4896a601bf8d59ac52461e28ecf49f78"
+    },
+    {
       "id": 20,
       "username": "Naaisha",
       "content": "super",

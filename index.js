@@ -10,6 +10,7 @@ const upload = multer({ dest: path.join(__dirname, "uploads") })
 
 app.use(express.json())
 app.use(express.static("public"))
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 function readData() {
   const raw = fs.readFileSync(path.join(__dirname, "data.json"))
