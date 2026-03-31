@@ -106,13 +106,18 @@ async function getPosts() {
     div.className = "post-card";
 
     div.innerHTML = `
-      <strong>${post.username}</strong>
+      <div class="post-info">
+        <strong>${post.username}</strong>
+        <span class="post-category">${post.category || "General"}</span>
+      </div>
       <p>${post.content}</p>
       ${post.image_url ? `<img src="${post.image_url}" width="200"/>` : ""}
-      <p>Likes: <span id="like-${post.id}">${post.likes || 0}</span></p>
-      <button data-id="${post.id}">
-        ${userLiked ? "❤️" : "🤍"}
-      </button>
+      <div class="post-footer">
+        <p>Likes: <span id="like-${post.id}">${post.likes || 0}</span></p>
+        <button data-id="${post.id}">
+          ${userLiked ? "❤️" : "🤍"}
+        </button>
+      </div>
     `;
 
     // Like button event
