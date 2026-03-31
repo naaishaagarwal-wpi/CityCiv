@@ -126,29 +126,66 @@ async function getPosts() {
 
 // LIKE POST
 async function likePost(postId) {
-  const { data: post } = await supabase
+  console.log("🟡 likePost called for postId:", postId, "username:", username);
+
+  // Fetch the post with likedBy array and current likes count
+  const { data: post, error: fetchError } = await supabase
     .from("posts")
     .select("likedBy, likes")
     .eq("id", postId)
     .single();
 
+  if (fetchError) {
+    console.error("❌ Error fetching post for like:", fetchError);
+    return;
+  }
+
+  if (!post) {
+    console.warn("⚠️ No post found with id:", postId);
+    return;
+  }
+
+  console.log("📌 Post data fetched:", post);
+
+  // Copy current array & like count
   let likedBy = post.likedBy || [];
   let likes = post.likes || 0;
 
+  console.log("📊 Previous likedBy:", likedBy);
+  console.log("📊 Previous likes:", likes);
+
+  // If user has already liked
   if (likedBy.includes(username)) {
+    console.log("🔁 User already liked — removing like");
+
+    // Remove user and decrease count
     likedBy = likedBy.filter(u => u !== username);
-    likes--;
+    likes = Math.max(0, likes - 1);
   } else {
+    console.log("➕ User has not liked — adding like");
+
     likedBy.push(username);
     likes++;
   }
 
-  await supabase
+  console.log("📊 New likedBy:", likedBy);
+  console.log("📊 New likes:", likes);
+
+  // Update the row in your posts table
+  const { error: updateError } = await supabase
     .from("posts")
     .update({ likedBy, likes })
     .eq("id", postId);
 
-  getPosts(); // refresh
+  if (updateError) {
+    console.error("❌ Error updating like:", updateError);
+    return;
+  }
+
+  console.log("✅ Like update successful for postId:", postId);
+
+  // Refresh the feed
+  getPosts();
 }
 
 /* =========================
