@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Enter Your Name</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Login</title>
 </head>
 <body>
-  <input id="nameInput" placeholder="Enter your name" />
-  <button onclick="saveName()">Continue</button>
 
-  <script>
-    function saveName() {
-      const name = document.getElementById("nameInput").value.trim()
-      if (!name) return
+<h2>Login</h2>
 
-      fetch("/user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
-      })
-      .then(() => {
-        localStorage.setItem("username", name)
-        window.location = "/home.html"
-      })
-    }
-  </script>
+<input type="email" id="email" placeholder="Email" />
+<input type="password" id="password" placeholder="Password" />
+
+<button id="signup">Sign Up</button>
+<button id="login">Login</button>
+<button id="google">Login with Google</button>
+
+<p id="message"></p>
+
+<script type="module" src="script.js"></script>
+
 </body>
 </html>
