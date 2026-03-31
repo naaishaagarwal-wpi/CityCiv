@@ -13,15 +13,17 @@
   <button id="signOutBtn">Sign Out</button>
 
   <!-- Create Post Modal Trigger -->
-  <button id="openPostBtn">➕ Create Post</button>
+  <button id="openPostBtn" class="button">➕ Create Post</button>
+
+  <button class="home, none" onclick="goHome()">
+    <img src="public\uploads\images\home-button.png" alt="Home Button" class="home">
+  </button>
 
   <div id="posts"></div>
 
-  <!-- Modal -->
-  <div id="postModal"
-       style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+  <div id="postModal" class="post1">
 
-    <div style="background:white; padding:20px; margin:100px auto; width:300px;">
+    <div class="post2">
       <h3>Create Post</h3>
 
       <textarea id="modalPostInput" placeholder="Write your post"></textarea>
