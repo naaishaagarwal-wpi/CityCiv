@@ -1,5 +1,5 @@
-const form = document.getElementById('form')
-const username_input = document.getElementById('firstname')
+const form = document.getElementById('signup-form')
+const username_input = document.getElementById('username')
 const email_input = document.getElementById('email')
 const password_input = document.getElementById('password')
 const confirm_password_input = document.getElementById('confirm_password')
@@ -9,7 +9,7 @@ form.addEventListener('submit', (e) => {
 
     let errors = []
 
-    if(firstname_input){
+    if(username_input){
         errors = getSignupFormErrors(username_input.value, email_input.value, password_input.value, confirm_password_input.value)
     }
     else{
@@ -67,3 +67,35 @@ function getLoginFormErrors(username, password){
 
     return errors
 }
+
+function goToFeed() {
+    window.location = "/feed.html"
+  }
+  
+  function goToLearn() {
+    window.location = "/learn.html"
+  }
+  
+  function goToMeetings() {
+    window.location = "/meetings.html"
+  }
+  
+  function goToAccount() {
+    window.location = "/account.html"
+  }
+function goHome() {
+    window.location = "/home.html"
+}
+
+function save() {
+
+      fetch("/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username_input.value }),
+      })
+      .then(() => {
+        localStorage.setItem("username", username_input.value)
+        localStorage.setItem("email", email_input.value)
+      })
+    }

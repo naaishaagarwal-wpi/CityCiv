@@ -4,7 +4,9 @@
     "Aishani",
     "parnitha",
     "colleen",
-    "aishani"
+    "aishani",
+    "Dasha Vo",
+    null
   ],
   "posts": [
     {
@@ -12,7 +14,7 @@
       "username": "Naaisha",
       "content": "tester",
       "category": "Announcements",
-      "likes": 0,
+      "likes": 3,
       "comments": [],
       "image": "4896a601bf8d59ac52461e28ecf49f78"
     },
@@ -30,7 +32,7 @@
       "username": "Naaisha",
       "content": "new",
       "category": "Events",
-      "likes": 0,
+      "likes": 1,
       "comments": []
     },
     {
@@ -47,7 +49,7 @@
       "username": "Naaisha",
       "content": "yay",
       "category": "Events",
-      "likes": 0,
+      "likes": 4,
       "comments": []
     },
     {
