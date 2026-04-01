@@ -6,10 +6,29 @@ body {
 }
 
 h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 12px;
   font-family: 'League Spartan', sans-serif;
 }
 
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.bigbutton{
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  background-color: #004aad;
+  padding: 20px;
+  border-radius: 10px;
+}
 .league-spartan {
   font-family: "League Spartan", sans-serif;
   font-optical-sizing: auto;
@@ -28,23 +47,45 @@ h1 {
   min-height: 90vh;
 }
 
+.feed-body {
+  background-color: #ffd493;
+}
+
 #posts {
   display: grid;
   gap: 14px;
   margin-top: 16px;
 }
 
-.home {
-  position: absolute;
-  right: 20px;
-  top: 10px;
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 0 10px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.home-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.home-icon {
   height: 8vh;
 }
 
 .none {
   border: none;
-  background-color: none;
+  background-color: transparent;
 }
+
 
 .post1 {
   display: none;
@@ -69,6 +110,17 @@ h1 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   padding: 14px;
   border: 1px solid #e2e8f0;
+}
+
+.post-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #004aad;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px 10px 0 0;
+  margin: -14px -14px 10px -14px;
 }
 
 .post-header {
@@ -101,10 +153,16 @@ h1 {
   margin: 10px 0;
 }
 
+.post-likes {
+  font-weight: bold;
+  color: #3182ce;
+  margin: 0;
+}
 .post-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 3px;
   font-size: 0.9rem;
   margin-top: 10px;
 }
@@ -113,7 +171,7 @@ h1 {
   cursor: pointer;
   padding: 6px 10px;
   border: 1px solid #3182ce;
-  background: #3182ce;
+  background: #004aad;
   color: #fff;
   border-radius: 6px;
   font-size: 0.9rem;

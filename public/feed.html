@@ -5,19 +5,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class = "feed-body">
 
-  <h1>Welcome <span id="nameDisplay"></span></h1>
+  <div class="feed-header">
+    <div class="header-actions">
+      <button class="button" id="signOutBtn">⬅️ Sign Out</button>
+      <button id="openPostBtn" class="button">➕ Create</button>
+    </div>
+    <button class="home-button none" onclick="goHome()">
+      <img src="public/uploads/images/home-button.png" alt="Home Button" class="home-icon">
+    </button>
+  </div>
 
-  <!-- Sign Out Button -->
-  <button id="signOutBtn">Sign Out</button>
-
-  <!-- Create Post Modal Trigger -->
-  <button id="openPostBtn" class="button">➕ Create Post</button>
-
-  <button class="home, none" onclick="goHome()">
-    <img src="public\uploads\images\home-button.png" alt="Home Button" class="home">
-  </button>
+  <h1>Welcome&nbsp;<span id="nameDisplay"></span></h1>
 
   <div id="posts"></div>
 
@@ -48,9 +48,6 @@
     </div>
 
   </div>
-
-  <!-- Home Navigation -->
-  <button id="goHomeBtn">Home</button>
 
   <!-- Load Supabase client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
