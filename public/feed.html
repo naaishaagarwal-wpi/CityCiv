@@ -15,6 +15,13 @@
   <!-- Create Post Modal Trigger -->
   <button id="openPostBtn" class="button">➕ Create Post</button>
 
+  <select id="categoryFilter">
+    <option value="">All</option>
+    <option value="General">General</option>
+    <option value="event">Events</option>
+    <option value="Announcements">Announcements</option>
+  </select>
+
   <button class="home, none" onclick="goHome()">
     <img src="public\uploads\images\home-button.png" alt="Home Button" class="home">
   </button>
@@ -32,9 +39,15 @@
 
       <select id="categoryInput">
         <option value="General">General</option>
-        <option value="Events">Events</option>
+        <option value="event">Events</option>
         <option value="Announcements">Announcements</option>
       </select>
+
+      <div id="eventFields" style="display:none;">
+        <input type="date" id="eventDate">
+        <input type="time" id="eventTime">
+        <input type="text" id="eventLocation" placeholder="Location">
+      </div>
 
       <br><br>
 
@@ -48,6 +61,8 @@
     </div>
 
   </div>
+
+  
 
 
   <!-- Load Supabase client -->

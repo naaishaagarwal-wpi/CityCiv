@@ -82,18 +82,37 @@ async function loadUser() {
   console.log("User:", username);
 }
 
+const categoryFilter = document.getElementById("categoryFilter");
+let currentFilter = "";
+
+// listen for changes
+if (categoryFilter) {
+  categoryFilter.addEventListener("change", () => {
+    currentFilter = categoryFilter.value;
+    getPosts();
+  });
+}
+
 // GET POSTS
 async function getPosts() {
   const container = document.getElementById("posts");
   if (!container) return;
 
-  const { data: posts, error } = await supabase
+  let query = supabase
     .from("posts")
     .select("*")
     .order("id", { ascending: false });
 
+  // apply filter ONLY if selected
+  if (currentFilter) {
+    query = query.eq("category", currentFilter);
+  }
+
+const { data: posts, error } = await query;
+
   if (error) {
     console.error(error);
+    alert(error.message); 
     return;
   }
 
@@ -111,6 +130,17 @@ async function getPosts() {
         <span class="post-category">${post.category || "General"}</span>
       </div>
       <p>${post.content}</p>
+      ${
+        post.category === "event"
+          ? `
+          <div class="event-info">
+            <p>📅 ${post.event_date || ""}</p>
+            <p>⏰ ${post.event_time || ""}</p>
+            <p>📍 ${post.event_location || ""}</p>
+          </div>
+        `
+          : ""
+      }
       ${post.image_url ? `<img src="${post.image_url}" width="200"/>` : ""}
       <div class="post-footer">
         <p>Likes: <span id="like-${post.id}">${post.likes || 0}</span></p>
@@ -213,6 +243,23 @@ if (closeBtn) {
   });
 }
 
+const categoryInput = document.getElementById("categoryInput");
+const eventFields = document.getElementById("eventFields");
+if (categoryInput && eventFields) {
+  const toggleEventFields = () => {
+    if (categoryInput.value === "event") {
+      eventFields.style.display = "block";
+    } else {
+      eventFields.style.display = "none";
+    }
+  };
+
+  categoryInput.addEventListener("change", toggleEventFields);
+
+  // run once on load
+  toggleEventFields();
+}
+
 /* =========================
    CREATE POST
 ========================= */
@@ -227,6 +274,9 @@ async function submitPost() {
   const content = document.getElementById("modalPostInput").value;
   const category = document.getElementById("categoryInput").value;
   const imageFile = document.getElementById("imageInput").files[0];
+  const eventDate = document.getElementById("eventDate")?.value;
+  const eventTime = document.getElementById("eventTime")?.value;
+  const eventLocation = document.getElementById("eventLocation")?.value;
 
   if (!content) return alert("Post cannot be empty");
 
@@ -256,6 +306,10 @@ async function submitPost() {
       likes: 0,
       likedBy: [],
       image_url,
+  
+      event_date: category === "event" && eventDate ? eventDate : null,
+      event_time: category === "event" && eventTime ? eventTime : null,
+      event_location: category === "event" && eventLocation ? eventLocation : null,
     },
   ]);
 
