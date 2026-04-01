@@ -5,8 +5,7 @@
     "parnitha",
     "colleen",
     "aishani",
-    "Dasha Vo",
-    null
+    "chica"
   ],
   "posts": [
     {
@@ -14,79 +13,112 @@
       "username": "Naaisha",
       "content": "tester",
       "category": "Announcements",
-      "likes": 3,
+      "likes": 23,
       "comments": [],
-      "image": "4896a601bf8d59ac52461e28ecf49f78"
+      "image": "4896a601bf8d59ac52461e28ecf49f78",
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 20,
       "username": "Naaisha",
       "content": "super",
       "category": "Events",
-      "likes": 0,
+      "likes": 6,
       "comments": [],
-      "image": "a3c88c51bf054cfa162333896119638c"
+      "image": "a3c88c51bf054cfa162333896119638c",
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 19,
       "username": "Naaisha",
       "content": "new",
       "category": "Events",
-      "likes": 1,
-      "comments": []
+      "likes": 9,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 18,
       "username": "Naaisha",
       "content": "hello",
       "category": "Events",
-      "likes": 0,
+      "likes": 1,
       "comments": [],
-      "image": "51180ba5fcc4f3cfbef9c087398f07c8"
+      "image": "51180ba5fcc4f3cfbef9c087398f07c8",
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 17,
       "username": "Naaisha",
       "content": "yay",
       "category": "Events",
-      "likes": 4,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 16,
       "username": "Naaisha",
       "content": "hello",
       "category": "General",
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 15,
       "username": "Naaisha",
       "content": "post",
       "category": "General",
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 14,
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 13,
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 12,
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 11,
-      "likes": 0,
-      "comments": []
+      "likes": 1,
+      "comments": [],
+      "likedBy": [
+        "its me"
+      ]
     },
     {
       "id": 10,
@@ -138,7 +170,8 @@
       "username": "Naaisha",
       "content": "hello",
       "likes": 1,
-      "comments": []
+      "comments": [],
+      "likedBy": []
     },
     {
       "id": 2,

@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Account</title>
-  <script type="text/javascript" src="account.js" defer></script>
+  <title>Login</title>
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>👤 Signup</h1>
-        <form id="signup-form">
-            <div>
-                <input type="text" name="username" id="username" placeholder="Username" required>
-            </div>
-            <div>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-            </div>
-            <div>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-            </div>
-            <div>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
-  <button type="button" onclick="save()">Save</button>
-  <button type="button" onclick="goHome()">Home</button>
+
+<h2>Login</h2>
+
+<input type="email" id="email" placeholder="Email" />
+<input type="password" id="password" placeholder="Password" />
+
+<button id="signup">Sign Up</button>
+<button id="login">Login</button>
+<button id="google">Login with Google</button>
+
+<p id="message"></p>
+
+<script type="module" src="script.js"></script>
+
 </body>
 </html>

@@ -4,44 +4,57 @@
   <title>Feed</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <h1>Welcome <span id="nameDisplay"></span></h1>
-  <button onclick="signOut()">Sign Out</button>
 
-  <button onclick="openModal()">➕ Create Post</button>
+  <!-- Sign Out Button -->
+  <button id="signOutBtn">Sign Out</button>
+
+  <!-- Create Post Modal Trigger -->
+  <button id="openPostBtn" class="button">➕ Create Post</button>
+
+  <button class="home, none" onclick="goHome()">
+    <img src="public\uploads\images\home-button.png" alt="Home Button" class="home">
+  </button>
 
   <div id="posts"></div>
 
-  <div id="postModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+  <div id="postModal" class="post1">
 
-    <div style="background:white; padding:20px; margin:100px auto; width:300px;">
+    <div class="post2">
       <h3>Create Post</h3>
-  
+
       <textarea id="modalPostInput" placeholder="Write your post"></textarea>
-  
+
       <br><br>
-  
+
       <select id="categoryInput">
         <option value="General">General</option>
         <option value="Events">Events</option>
         <option value="Announcements">Announcements</option>
       </select>
-  
+
       <br><br>
-  
+
       <input type="file" id="imageInput" />
-  
+
       <br><br>
-  
-      <button onclick="submitPost()">Post</button>
-      <button onclick="closeModal()">Cancel</button>
+
+      <!-- Buttons now have IDs for JS listeners -->
+      <button id="submitPostBtn">Post</button>
+      <button id="closeModalBtn">Cancel</button>
     </div>
-  
+
   </div>
 
-  <button onclick="goHome()">Home</button>
 
-  <script src="script.js"></script>
+  <!-- Load Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- Load your app logic as a module -->
+  <script type="module" src="script.js"></script>
+
 </body>
 </html>
