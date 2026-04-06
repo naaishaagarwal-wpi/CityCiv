@@ -12,12 +12,26 @@ h1 {
   margin-bottom: 12px;
   font-family: 'League Spartan', sans-serif;
 }
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: 'League Spartan', sans-serif;
+}
 
 .home-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 200px;
+  margin: 0 auto;
+}
+
+.meeting-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0 auto;
 }
 
@@ -29,11 +43,32 @@ h1 {
   padding: 20px;
   border-radius: 10px;
 }
-.league-spartan {
-  font-family: "League Spartan", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
+
+#meetings a {
+  color: white;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 0 auto;
+}
+
+#meetings a:visited {
+  color: #abbdd2;
+}
+
+#meetings {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#meetings div {
+  width: fit-content;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 10px auto;
 }
 
 .home-body {
@@ -53,7 +88,9 @@ h1 {
 
 #posts {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 14px;
+  padding: 20px;
   margin-top: 16px;
 }
 
@@ -75,6 +112,9 @@ h1 {
   background: transparent;
   padding: 0;
   cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .home-icon {
@@ -110,6 +150,7 @@ h1 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   padding: 14px;
   border: 1px solid #e2e8f0;
+  position: relative;
 }
 
 .post-info {
@@ -157,14 +198,19 @@ h1 {
   font-weight: bold;
   color: #3182ce;
   margin: 0;
+  font-size: 20px;
+}
+.post-heart{
+  font-size: 20px;
 }
 .post-footer {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   gap: 3px;
   font-size: 0.9rem;
-  margin-top: 10px;
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
 }
 
 .button {
@@ -193,4 +239,17 @@ button:hover {
 #postModal select,
 #postModal input[type=file] {
   width: 100%;
+}
+
+.event-info{
+  flex-direction: column;
+  gap: 6px;
+  display: inline-flex; 
+  width: 30%;
+  border:#0042ad solid 1px;
+  padding: 3px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #0042ad;
+  color: #fff;
 }

@@ -183,10 +183,10 @@ async function getPosts() {
       ${
         post.category === "event"
           ? `
-          <div class="event-info">
-            <p>📅 ${post.event_date || ""}</p>
-            <p>⏰ ${post.event_time || ""}</p>
-            <p>📍 ${post.event_location || ""}</p>
+          <div>
+            <p class="event-info">📅 ${post.event_date || ""}</p>
+            <p class="event-info">⏰ ${post.event_time || ""}</p>
+            <p class="event-info">📍 ${post.event_location || ""}</p>
           </div>
         `
           : ""
@@ -194,7 +194,7 @@ async function getPosts() {
       ${post.image_url ? `<img src="${post.image_url}" width="200"/>` : ""}
       <div class="post-footer">
         <p class="post-likes"><span id="like-${post.id}">${post.likes || 0}</span></p>
-        <button class = "none" data-id="${post.id}">
+        <button class = "post-heart none" data-id="${post.id}">
           ${userLiked ? "❤️" : "🤍"}
         </button>
       </div>
