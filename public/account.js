@@ -99,3 +99,39 @@ function save() {
         localStorage.setItem("email", email_input.value)
       })
     }
+
+function editAccount() {
+    username_change.disabled = false
+    email_change.disabled = false
+    password_change.disabled = false
+    confirm_password_change.disabled = false
+    document.getElementById("saveBtn").style.display = "block"
+}
+
+function signOut() {
+    localStorage.removeItem("username")
+    localStorage.removeItem("email")
+    window.location = "/"
+}
+
+function deleteAccount() {
+    if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+        // Here you would typically make an API call to delete the account from the server
+        localStorage.removeItem("username")
+        localStorage.removeItem("email")
+        window.location = "/"
+    }
+}
+
+function editSettings() {
+    notificationPreferencesInput.disabled = false
+    privacySettingsInput.disabled = false
+    languageInput.disabled = false
+    themeInput.disabled = false
+    document.getElementById("saveSettingsBtn").style.display = "block"
+}
+
+function saveSettings() {
+    // Here you would typically make an API call to save the settings to the server
+    alert("Settings saved!")
+}
