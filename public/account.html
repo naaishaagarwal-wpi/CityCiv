@@ -14,8 +14,56 @@
 
         <p>Username: <span id="username-display"></span></p>
         <p>Email: <span id="email-display"></span></p>
-        <button type="button" onclick="editAccount()">Edit Account</button>
-        
+
+        <div>
+            <button id="editAccountBtn" onclick="editAccount()">Edit Account</button>
+
+            <div id="editForm" style="display:none;">
+                <input type="text" id="username_change" placeholder="New Username" disabled>
+                <input type="email" id="email_change" placeholder="New Email" disabled>
+                <input type="password" id="password_change" placeholder="New Password" disabled>
+                <input type="password" id="confirm_password_change" placeholder="Confirm New Password" disabled>
+                <button id="saveBtn" style="display:none;">Save Changes</button>
+            </div>
+
+        </div>
+
+        <div>
+            <button id="signOutBtn" onclick="signOut()">Sign Out</button>
+        </div>
+
+        <div>
+            <button id="deleteAccountBtn" onclick="deleteAccount()">Delete Account</button>
+        </div>
     </div>
+
+    <div class="wrapper">
+        <h2>My Settings</h2>
+        <div id="settings">
+            <p>Notification Preferences: <span id="notification-preferences"></span></p>
+            <p>Privacy Settings: <span id="privacy-settings"></span></p>
+            <p>Language: <span id="language"></span></p>
+            <p>Theme: <span id="theme"></span></p>
+            <button id="editSettingsBtn" onclick="editSettings()">Edit Settings</button>
+
+            <div id="editSettingsForm" style="display:none;">
+                <label for="notificationPreferencesInput">Notification Preferences:</label>
+                <input type="text" id="notificationPreferencesInput" placeholder="e.g. Email, SMS, Push">
+
+                <label for="privacySettingsInput">Privacy Settings:</label>
+                <input type="text" id="privacySettingsInput" placeholder="e.g. Public, Friends Only, Private">
+
+                <label for="languageInput">Language:</label>
+                <input type="text" id="languageInput" placeholder="e.g. English, Spanish">
+
+                <label for="themeInput">Theme:</label>
+                <input type="text" id="themeInput" placeholder="e.g. Light, Dark">
+
+                <button id="saveSettingsBtn" onclick="saveSettings()">Save Settings</button>
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>
