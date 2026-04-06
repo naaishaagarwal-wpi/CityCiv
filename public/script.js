@@ -93,6 +93,16 @@ if (categoryFilter) {
   });
 }
 
+const sortFilter = document.getElementById("sortFilter");
+let currentSort = "latest";
+
+if (sortFilter) {
+  sortFilter.addEventListener("change", () => {
+    currentSort = sortFilter.value;
+    getPosts();
+  });
+}
+
 // GET POSTS
 async function getPosts() {
   const container = document.getElementById("posts");
@@ -100,15 +110,25 @@ async function getPosts() {
 
   let query = supabase
     .from("posts")
-    .select("*")
-    .order("id", { ascending: false });
+    .select(`
+      *,
+      replies (*)
+    `)
 
   // apply filter ONLY if selected
   if (currentFilter) {
     query = query.eq("category", currentFilter);
   }
 
-const { data: posts, error } = await query;
+  if (currentSort === "latest") {
+    query = query.order("inserted_at", { ascending: false });
+  }
+
+  if (currentSort === "liked") {
+    query = query.order("likes", { ascending: false });
+  }
+
+  const { data: posts, error } = await query;
 
   if (error) {
     console.error(error);
@@ -116,13 +136,40 @@ const { data: posts, error } = await query;
     return;
   }
 
+  // frontend sorting
+  let sortedPosts = [...posts];
+
+  // most replied
+  if (currentSort === "replied") {
+    sortedPosts.sort((a, b) => {
+      return (b.replies?.length || 0) - (a.replies?.length || 0);
+    });
+  }
+
+  // upcoming events
+  if (currentSort === "events") {
+    sortedPosts = sortedPosts
+      .filter(p => {
+        return (
+          p.category === "event" &&
+          p.event_date &&
+          new Date(p.event_date) >= new Date()
+        );
+      })
+      .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
+  }
+
   container.innerHTML = "";
 
-  posts.forEach(post => {
+  sortedPosts.forEach(post => {
     const userLiked = post.likedBy?.includes(username);
 
     const div = document.createElement("div");
     div.className = "post-card";
+
+    const repliesHTML = (post.replies || [])
+      .map(reply => `<p class="reply">↳ ${reply.content}</p>`)
+      .join("");
 
     div.innerHTML = `
       <div class="post-info">
@@ -130,6 +177,9 @@ const { data: posts, error } = await query;
         <span class="post-category">${post.category || "General"}</span>
       </div>
       <p>${post.content}</p>
+      <div class="replies">
+        ${repliesHTML}
+      </div>
       ${
         post.category === "event"
           ? `
@@ -148,6 +198,9 @@ const { data: posts, error } = await query;
           ${userLiked ? "❤️" : "🤍"}
         </button>
       </div>
+
+      <input type="text" placeholder="Write a reply..." id="reply-input-${post.id}" />
+      <button onclick="addReply('${post.id}')">Reply</button>
     `;
 
     // Like button event
@@ -321,6 +374,27 @@ async function submitPost() {
 
   modal.style.display = "none";
   getPosts();
+}
+
+window.addReply = async function(postId) {
+  const input = document.getElementById(`reply-input-${postId}`);
+  const content = input.value;
+
+  if (!content) return;
+
+  const { error } = await supabase.from("replies").insert({
+    post_id: postId,
+    content,
+    username // optional if you store it
+  });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  input.value = "";
+  getPosts(); // refresh
 }
 
 /* =========================
