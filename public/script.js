@@ -401,10 +401,28 @@ window.addReply = async function(postId) {
    NAV
 ========================= */
 
-window.signOut = async () => {
-  await supabase.auth.signOut();
-  window.location = "/";
-};
+const signOutBtn = document.getElementById("signOutBtn");
+
+if (signOutBtn) {
+  signOutBtn.addEventListener("click", async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Error signing out:", error.message);
+      alert("Sign out failed: " + error.message);
+      return;
+    }
+
+    // Redirect to login page
+    window.location.href = "/";
+  });
+}
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT") {
+    window.location.href = "/";
+  }
+});
 
 window.goHome = () => {
   window.location = "/home.html";
