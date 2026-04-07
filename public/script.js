@@ -183,7 +183,7 @@ async function getPosts() {
       ${
         post.category === "event"
           ? `
-          <div>
+          <div class="event-details">
             <p class="event-info">📅 ${post.event_date || ""}</p>
             <p class="event-info">⏰ ${post.event_time || ""}</p>
             <p class="event-info">📍 ${post.event_location || ""}</p>
@@ -193,18 +193,21 @@ async function getPosts() {
       }
       ${post.image_url ? `<img src="${post.image_url}" width="200"/>` : ""}
       <div class="post-footer">
-        <p class="post-likes"><span id="like-${post.id}">${post.likes || 0}</span></p>
-        <button class = "post-heart none" data-id="${post.id}">
-          ${userLiked ? "❤️" : "🤍"}
-        </button>
+        <div class="reply-section">
+          <input class="reply-input" type="text" placeholder="Write a reply..." id="reply-input-${post.id}" />
+          <button class="reply-button" onclick="addReply('${post.id}')">Reply</button>
+        </div>
+        <div class="like-section">
+          <p class="post-likes"><span id="like-${post.id}">${post.likes || 0}</span></p>
+          <button class = "post-heart none" data-id="${post.id}">
+            ${userLiked ? "❤️" : "🤍"}
+          </button>
+        </div>
       </div>
-
-      <input type="text" placeholder="Write a reply..." id="reply-input-${post.id}" />
-      <button onclick="addReply('${post.id}')">Reply</button>
     `;
 
     // Like button event
-    div.querySelector("button").addEventListener("click", () => {
+    div.querySelector(".post-heart").addEventListener("click", () => {
       likePost(post.id);
     });
 
