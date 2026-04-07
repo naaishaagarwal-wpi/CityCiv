@@ -381,6 +381,7 @@ h2 {
   cursor: pointer;
   padding: 6px 10px;
   border: 1px solid #4b8fe8;
+  border: 1px solid #4b8fe8;
   background: #004aad;
   color: #fff;
   border-radius: 6px;
@@ -405,6 +406,10 @@ button:hover {
   width: 100%;
 }
 /* Add some styling to the info on posts about events page */
+.event-details {
+  margin-bottom: 60px;
+}
+
 .event-details {
   margin-bottom: 60px;
 }
