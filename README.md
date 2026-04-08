@@ -11,3 +11,5 @@ We are using VS Code to run the code.
 Once you open the app, you will enter our login/sign up page. You should enter a valid email and password and then you will be prompted to go to your email to verify your email (a supabase email will be sent to you). From here you will need to log in again and then you can access all the pages.
 
 The MVP page is the Dashboard and the rest are part of our extensions. You can create a post with the add post button and when you create a post, the post will be added to the database on Supabase. You can also like/unlike and reply to posts. 
+
+You can also view our app live hosted at this URL: https://city-civ-nvbz.vercel.app/
