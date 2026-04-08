@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f5f7;
+  background: #ffd493;
   margin: 20px;
   color: #1a1a1a;
 }
@@ -100,6 +100,16 @@ h2 {
   min-height: 90vh;
 }
 
+.index-body{
+  background-color: #ffd493;
+  /* Fills any unfilled areas, including the top */
+  background-image: url("public/uploads/images/CityCivbg.jpg");
+  background-size: 100% auto;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 90vh;
+}
 .feed-body {
   background-color: #ffd493;
 }
@@ -273,4 +283,53 @@ button:hover {
 
 .event-details {
   margin-bottom: 60px;
+}
+
+.login-button {
+  display: flex;
+  cursor: pointer;
+  padding: 15px 15px;
+  background: #004aad;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  gap: 10px;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.login-input {
+  padding: 8px;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+.account-button {
+  display: flex;
+  cursor: pointer;
+  padding: 15px 15px;
+  background: #004aad;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  gap: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  color:#004aad;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
 }
