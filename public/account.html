@@ -8,6 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Account</title>
+    <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="account.js" defer></script>
 </head>
 
@@ -21,26 +22,26 @@
 
         <div>
             <!--Javascript Function, button that allows user to edit their account information-->
-            <button id="editAccountBtn" onclick="editAccount()">Edit Account</button>
-
-            <div id="editForm" style="display:none;">
-                <input type="text" id="username_change" placeholder="New Username" disabled>
-                <input type="email" id="email_change" placeholder="New Email" disabled>
-                <input type="password" id="password_change" placeholder="New Password" disabled>
-                <input type="password" id="confirm_password_change" placeholder="Confirm New Password" disabled>
+            <button class="account-button" id="editAccountBtn" onclick="editAccount()">Edit Account</button>
+<br>
+            <div id="editForm">
+                <input type="text" id="username_change" placeholder="New Username" >
+                <input type="email" id="email_change" placeholder="New Email" >
+                <input type="password" id="password_change" placeholder="New Password" >
+                <input type="password" id="confirm_password_change" placeholder="Confirm New Password">
                 <button id="saveBtn" style="display:none;">Save Changes</button>
             </div>
 
         </div>
-
+<br>
         <div>
             <!--Javascript Function, button that allows user to sign out of their account-->
-            <button id="signOutBtn" onclick="signOut()">Sign Out</button>
+            <button class="account-button" id="signOutBtn" onclick="signOut()">Sign Out</button>
         </div>
-
+<br>
         <div>
             <!--Javascript Function, button that allows user to delete their account information-->
-            <button id="deleteAccountBtn" onclick="deleteAccount()">Delete Account</button>
+            <button class="account-button" id="deleteAccountBtn" onclick="deleteAccount()">Delete Account</button>
         </div>
     </div>
 
@@ -54,9 +55,9 @@
             <p>Theme: <span id="theme"></span></p>
 
             <!--Javascript Function, button that allows user to edit their account settings-->
-            <button id="editSettingsBtn" onclick="editSettings()">Edit Settings</button>
+            <button class="account-button" id="editSettingsBtn" onclick="editSettings()">Edit Settings</button>
 
-            <div id="editSettingsForm" style="display:none;">
+            <div id="editSettingsForm">
                 <label for="notificationPreferencesInput">Notification Preferences:</label>
                 <input type="text" id="notificationPreferencesInput" placeholder="e.g. Email, SMS, Push">
 
@@ -70,7 +71,7 @@
                 <input type="text" id="themeInput" placeholder="e.g. Light, Dark">
 
                 <!-- Javascript Function, button that allows user to save their settings -->
-                <button id="saveSettingsBtn" onclick="saveSettings()">Save Settings</button>
+                <button class="account-button" id="saveSettingsBtn" onclick="saveSettings()">Save Settings</button>
             </div>
 
         </div>

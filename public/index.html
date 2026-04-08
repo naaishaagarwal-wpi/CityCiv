@@ -6,18 +6,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
+<body class="index-body">
+<h1>CityCiv</h1>
 <!-- Signup/Login Form for user authentication -->
 <h2>Signup/Login</h2>
+<div class="login-container">
+<input class="login-input" type="email" id="email" placeholder="Email" />
+<input class="login-input" type="password" id="password" placeholder="Password" />
+<button class="login-button" id="login">Login</button>
+<br>
+<button class="login-button" id="signup">Sign Up</button>
 
-<input type="email" id="email" placeholder="Email" />
-<input type="password" id="password" placeholder="Password" />
-
-<button id="signup">Sign Up</button>
-<button id="login">Login</button>
-<button id="google">Login with Google</button>
-
+<!--<button class="login-button" id="google">Login with Google</button>-->
+</div>
 <p id="message"></p>
 
 <script type="module" src="script.js"></script>
