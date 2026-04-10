@@ -360,10 +360,6 @@ window.addReply = async function(postId) {
   getPosts(); // refresh
 }
 
-/* =========================
-   NAV
-========================= */
-
 const signOutBtn = document.getElementById("signOutBtn");
 
 if (signOutBtn) {
