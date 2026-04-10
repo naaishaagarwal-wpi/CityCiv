@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Feed page for displaying posts and updates from the community -->
 <html>
 <head>
   <title>Feed</title>
@@ -9,9 +10,12 @@
 
   <div class="feed-header">
     <div class="header-actions">
+      <!--button for signing out of the app-->
       <button class="button" id="signOutBtn">⬅️ Sign Out</button>
+      <!--button for creating and adding posts to the feed-->
       <button id="openPostBtn" class="button">➕ Create</button>
 
+    <!--dropdown filters for sorting and categorizing posts in the feed-->
   <select id="categoryFilter">
     <option value="">All</option>
     <option value="General">General</option>
@@ -25,6 +29,7 @@
     <option value="events">Upcoming Events</option>
   </select>
     </div>
+    <!--javascript function, button to navigate to the home page -->
     <button class="home-button none" onclick="goHome()">
       <img src="public/uploads/images/home-button.png" alt="Home Button" class="home-icon">
     </button>
