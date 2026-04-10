@@ -1,3 +1,10 @@
+/* CSS file for the CityCiv application */
+
+/* make sure there is no horizontal overflow */
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #ffd493;
@@ -10,16 +17,28 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-bottom: 12px;
-  font-family: 'League Spartan', sans-serif;
+  font-family: sans-serif;
+}
+/*phone responsiveness for h1 */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
 }
 h2 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 12px;
-  font-family: 'League Spartan', sans-serif;
+  font-family: sans-serif;
+}
+@media (max-width: 600px) {
+  h2 {
+    font-size: 0.6rem;
+  }
 }
 
+/* Add some spacing and styling to the home page buttons */
 .home-buttons {
   display: flex;
   flex-direction: column;
@@ -28,13 +47,26 @@ h2 {
   margin: 0 auto;
 }
 
+@media (max-width: 600px) {
+  .home-buttons {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+/* Add some spacing and styling to the town meeting page buttons */
 .meeting-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin: 0 auto;
 }
-
+@media (max-width: 600px) {
+  .meeting-buttons {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+/* Add some spacing and styling to the reply section */
 .reply-button {
   background-color: #4b8fe8;
   color: white;
@@ -44,7 +76,12 @@ h2 {
   cursor: pointer;
   font-size: 0.8rem;
 }
-
+@media (max-width: 600px) {
+  .reply-button {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
 .reply-input {
   padding: 4px 6px;
   border: 1px solid #ccd0d5;
@@ -53,6 +90,21 @@ h2 {
   flex: 1;
   min-width: 120px;
 }
+
+@media (max-width: 600px) {
+  .reply-input {
+    font-size: 0.7rem;
+    padding: 3px 5px;
+  }
+}
+/* Add some spacing and styling to the actual replies under posts */
+.reply{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Add some styling to the big buttons on the home page */
 .bigbutton{
   color: #fff;
   font-weight: bold;
@@ -62,6 +114,18 @@ h2 {
   border-radius: 10px;
 }
 
+@media (max-width: 600px) {
+  .home-buttons {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .bigbutton {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+  }
+}
+/* Add some styling to the links on the town meeting page */
 #meetings a {
   color: white;
   display: block;
@@ -71,7 +135,13 @@ h2 {
   overflow-wrap: break-word;
   margin: 0 auto;
 }
-
+@media (max-width: 600px) {
+  #meetings a {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}
 #meetings a:visited {
   color: #abbdd2;
 }
@@ -88,7 +158,7 @@ h2 {
   overflow-wrap: break-word;
   margin: 10px auto;
 }
-
+/* Add the city image to the home page background */
 .home-body {
   background-color: #ffd493;
   /* Fills any unfilled areas, including the top */
@@ -99,7 +169,12 @@ h2 {
   background-attachment: fixed;
   min-height: 90vh;
 }
-
+@media (max-width: 600px) {
+  .home-body {
+    background-size: cover;
+    background-position: left center;
+  }
+}
 .index-body{
   background-color: #ffd493;
   /* Fills any unfilled areas, including the top */
@@ -110,10 +185,22 @@ h2 {
   background-attachment: fixed;
   min-height: 90vh;
 }
+@media (max-width: 600px) {
+  .index-body {
+    background-size: cover;
+    background-position: left center;
+  }
+}
 .feed-body {
   background-color: #ffd493;
 }
-
+@media (max-width: 600px) {
+  .feed-body {
+    background-size: cover;
+    background-position: left center;
+  }
+}
+/* Makes the posts on the feed page in columns*/
 #posts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -122,6 +209,32 @@ h2 {
   margin-top: 16px;
 }
 
+@media (max-width: 600px) {
+  #posts {
+    grid-template-columns: 1fr;
+    padding: 2px;
+  }
+}
+@media (max-width: 600px) {
+  #posts {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .post-card,
+  .post-card * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* Add some spacing and styling to the feed header */
 .feed-header {
   display: flex;
   justify-content: space-between;
@@ -129,12 +242,18 @@ h2 {
   margin-bottom: 14px;
   padding: 0 10px;
 }
-
+@media (max-width: 600px) {
+  .feed-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
 .header-actions {
   display: flex;
   gap: 10px;
 }
-
+/* Add some styling to the button that takes you home */
 .home-button {
   border: none;
   background: transparent;
@@ -144,7 +263,12 @@ h2 {
   top: 20px;
   right: 20px;
 }
-
+@media (max-width: 600px) {
+  .home-button {
+    top: 10px;
+    right: 10px;
+  }
+}
 .home-icon {
   height: 8vh;
 }
@@ -154,7 +278,7 @@ h2 {
   background-color: transparent;
 }
 
-
+/* Add some styling to the post modal pop-up*/
 .post1 {
   display: none;
   position: fixed;
@@ -171,7 +295,7 @@ h2 {
   margin: 100px auto;
   width: 300px;
 }
-
+/* Add some styling to the posts on the feed page */
 .post-card {
   background: #fff;
   border-radius: 10px;
@@ -221,7 +345,7 @@ h2 {
   border-radius: 8px;
   margin: 10px 0px 60px 0px;
 }
-
+/* Add some styling to the like and reply sections of the posts on the feed page */
 .post-likes {
   font-weight: bold;
   color: #4b8fe8;
@@ -252,7 +376,7 @@ h2 {
   align-items: center;
   gap: 3px;
 }
-
+/*Standard styling for buttons across the site*/
 .button {
   cursor: pointer;
   padding: 6px 10px;
@@ -266,9 +390,9 @@ h2 {
 button:hover {
   opacity: 0.9;
 }
-
+/* Add some styling to the post modal pop-up form elements */
 #postModal textarea {
-  width: 100%;
+  width: 94%;
   height: 80px;
   border: 1px solid #ccd0d5;
   border-radius: 6px;
@@ -280,11 +404,24 @@ button:hover {
 #postModal input[type=file] {
   width: 100%;
 }
-
+/* Add some styling to the info on posts about events page */
 .event-details {
   margin-bottom: 60px;
 }
 
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #004aad;
+  color: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  width:fit-content;
+  max-width: 100%;
+
+}
+/* Add some styling to the login page */
 .login-button {
   display: flex;
   cursor: pointer;
@@ -311,7 +448,7 @@ button:hover {
   width: 20%;
   margin-bottom: 10px;
 }
-
+/* Add some styling to the buttons on account page */
 .account-button {
   display: flex;
   cursor: pointer;
@@ -323,7 +460,7 @@ button:hover {
   font-size: 0.9rem;
   gap: 10px;
 }
-
+/*Standard styling for dropdowns across the site*/
 .dropdown {
   position: relative;
   display: inline-block;
