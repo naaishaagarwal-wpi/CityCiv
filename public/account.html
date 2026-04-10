@@ -3,7 +3,6 @@
  <!--This page was designed with the aid of a Coding2GO YouTube Video: https://www.youtube.com/watch?v=bVl5_UdcAy0&t=222s -->
 <html lang="en">
 <!--Javascript Function, button that brings user to the home page -->
-<button onclick="goHome()">Home</button>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +12,10 @@
 </head>
 
 <body>
+    <button class="home-button none" onclick="goHome()">
+      <img src="public/uploads/images/home-button.png" alt="Home Button" class="home-icon">
+</button>
+
     <div class="wrapper">
         <!--Allows user to manage their account information and edit it-->
         <h1>👤 Account Information</h1>
