@@ -1,3 +1,5 @@
+//this loads the supabase client so that it can be accessed, code from supabase developer docs: https://supabase.com/docs/guides/auth/server-side/creating-a-client
+
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 const supabaseUrl = "https://eucrnjfbbnpkhmslhlsx.supabase.co";

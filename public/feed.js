@@ -1,74 +1,18 @@
 import { supabase } from "./supabaseClient.js";
 
 /* =========================
-   AUTH SECTION (LOGIN PAGE)
-========================= */
-
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const message = document.getElementById("message");
-
-// SIGN UP
-const signupBtn = document.getElementById("signup");
-if (signupBtn) {
-  signupBtn.addEventListener("click", async () => {
-    const { data, error } = await supabase.auth.signUp({
-      email: emailInput.value,
-      password: passwordInput.value,
-    });
-
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
-
-    message.textContent = error ? error.message : "Check your email!";
-  });
-}
-
-// LOGIN
-const loginBtn = document.getElementById("login");
-if (loginBtn) {
-  loginBtn.addEventListener("click", async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: emailInput.value,
-      password: passwordInput.value,
-    });
-
-    if (error) {
-      message.textContent = error.message;
-    } else {
-      window.location.href = "/feed.html";
-    }
-  });
-}
-
-// GOOGLE LOGIN
-const googleBtn = document.getElementById("google");
-if (googleBtn) {
-  googleBtn.addEventListener("click", async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-
-    if (error) message.textContent = error.message;
-  });
-}
-
-// AUTO REDIRECT (only on login page)
-if (window.location.pathname === "/" || window.location.pathname.includes("index")) {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) window.location.href = "/feed.html";
-}
-
-/* =========================
    FEED SECTION
 ========================= */
 
 let username = null;
 
+//all supabase code was referenced from supabase api docs such as: https://supabase.com/docs/reference/javascript/auth-signinanonymously
 // Load user
 async function loadUser() {
   const { data: { session } } = await supabase.auth.getSession();
 
+  //resets back to sign in page if user did not sign in
+  //all window reset code learned from https://developer.mozilla.org/en-US/docs/Web/API/Window/location
   if (!session) {
     window.location = "/";
     return;
@@ -93,6 +37,7 @@ if (categoryFilter) {
   });
 }
 
+//sorting functionality
 const sortFilter = document.getElementById("sortFilter");
 let currentSort = "latest";
 
@@ -103,7 +48,7 @@ if (sortFilter) {
   });
 }
 
-// GET POSTS
+// get posts
 async function getPosts() {
   const container = document.getElementById("posts");
   if (!container) return;
@@ -115,7 +60,7 @@ async function getPosts() {
       replies (*)
     `)
 
-  // apply filter ONLY if selected
+  // apply filter if selected
   if (currentFilter) {
     query = query.eq("category", currentFilter);
   }
@@ -159,6 +104,8 @@ async function getPosts() {
       .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
   }
 
+  //this creates the div for each post
+  //https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting
   container.innerHTML = "";
 
   sortedPosts.forEach(post => {
@@ -170,7 +117,9 @@ async function getPosts() {
     const repliesHTML = (post.replies || [])
       .map(reply => `<p class="reply">↳ ${reply.content}</p>`)
       .join("");
+    
 
+    
     div.innerHTML = `
       <div class="post-info">
         <strong>${post.username}</strong>
@@ -215,7 +164,7 @@ async function getPosts() {
   });
 }
 
-// LIKE POST
+// like post function
 async function likePost(postId) {
   console.log("🟡 likePost called for postId:", postId, "username:", username);
 
@@ -279,9 +228,7 @@ async function likePost(postId) {
   getPosts();
 }
 
-/* =========================
-   MODAL
-========================= */
+//this is the function for the modal that creates the pop up when pressing create post button
 
 const openBtn = document.getElementById("openPostBtn");
 const modal = document.getElementById("postModal");
@@ -400,10 +347,6 @@ window.addReply = async function(postId) {
   getPosts(); // refresh
 }
 
-/* =========================
-   NAV
-========================= */
-
 const signOutBtn = document.getElementById("signOutBtn");
 
 if (signOutBtn) {
@@ -430,10 +373,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 window.goHome = () => {
   window.location = "/home.html";
 };
-
-/* =========================
-   INIT
-========================= */
 
 if (window.location.pathname.includes("feed")) {
   loadUser().then(getPosts);
