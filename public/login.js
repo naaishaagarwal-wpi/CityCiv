@@ -1,18 +1,59 @@
-const supabaseUrl = "https://eucrnjfbbnpkhmslhlsx.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Y3JuamZiYm5wa2htc2xobHN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NDczNDcsImV4cCI6MjA5MDAyMzM0N30.OZ4EJgTnKVcoxqnTuj4M8t27Ba_XU4Cbxv0bwRh7oiA";
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+import { supabase } from "./supabaseClient.js";
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  const email = document.getElementById("nameInput").value.trim();
-  if (!email) return alert("Enter an email");
+//this documentation gave all references for authentication code: https://supabase.com/docs/guides/auth/users
 
-  const { error } = await supabase.auth.signInWithOtp({ email });
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const message = document.getElementById("message");
 
-  if (error) {
-    alert("Login failed");
-    console.error(error);
-    return;
-  }
+// sign up
+const signupBtn = document.getElementById("signup");
+if (signupBtn) {
+  signupBtn.addEventListener("click", async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: emailInput.value,
+      password: passwordInput.value,
+    });
 
-  alert("Check your email for a login link!");
-});
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+
+    message.textContent = error ? error.message : "Check your email!";
+  });
+}
+
+// login
+const loginBtn = document.getElementById("login");
+if (loginBtn) {
+  loginBtn.addEventListener("click", async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: emailInput.value,
+      password: passwordInput.value,
+    });
+
+    if (error) {
+      message.textContent = error.message;
+    } else {
+      window.location.href = "/feed.html";
+    }
+  });
+}
+
+// google log in code
+//(not in use right now because did not set up google auth on Supabase, this is just placeholder for potential future work)
+const googleBtn = document.getElementById("google");
+if (googleBtn) {
+  googleBtn.addEventListener("click", async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+
+    if (error) message.textContent = error.message;
+  });
+}
+
+// if on login page and signed in this will automatically send to home page
+if (window.location.pathname === "/" || window.location.pathname.includes("index")) {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) window.location.href = "/home.html";
+}
