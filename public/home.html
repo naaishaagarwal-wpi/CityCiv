@@ -5,8 +5,9 @@
 <head>
   <title>Home</title>
   <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
 </head>
 
 <body class="home-body">
@@ -19,6 +20,9 @@
     <button class="bigbutton" onclick="goToLearn()">📚 Learn</button>
     <button class="bigbutton" onclick="goToMeetings()">🏛️ Town Meetings</button>
     <button class="bigbutton" onclick="goToAccount()">👤 Account</button>
+    <button class="bigbutton" id="installBtn">
+      Download App
+    </button>
   </div>
 
   <script src="home.js"></script>

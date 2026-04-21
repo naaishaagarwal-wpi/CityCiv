@@ -1,9 +1,5 @@
 import { supabase } from "./supabaseClient.js";
 
-/* =========================
-   FEED SECTION
-========================= */
-
 let username = null;
 
 //all supabase code was referenced from supabase api docs such as: https://supabase.com/docs/reference/javascript/auth-signinanonymously
@@ -48,23 +44,40 @@ if (sortFilter) {
   });
 }
 
+const searchInput = document.getElementById("searchInput");
+let currentSearch = "";
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    currentSearch = searchInput.value;
+    getPosts();
+  });
+}
+
 // get posts
 async function getPosts() {
   const container = document.getElementById("posts");
   if (!container) return;
 
+  //https://supabase.com/docs/reference/javascript/textsearch
   let query = supabase
-    .from("posts")
-    .select(`
-      *,
-      replies (*)
-    `)
+  .from("posts")
+  .select(`
+    *,
+    replies (*)
+  `);
 
-  // apply filter if selected
+  // category filter
   if (currentFilter) {
     query = query.eq("category", currentFilter);
   }
 
+  // search filter
+  if (currentSearch) {
+    query = query.ilike("content", `%${currentSearch}%`);
+  }
+
+  // sorting
   if (currentSort === "latest") {
     query = query.order("inserted_at", { ascending: false });
   }
@@ -96,7 +109,7 @@ async function getPosts() {
     sortedPosts = sortedPosts
       .filter(p => {
         return (
-          p.category === "event" &&
+          p.category === "Events" &&
           p.event_date &&
           new Date(p.event_date) >= new Date()
         );

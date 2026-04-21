@@ -5,6 +5,8 @@
   <title>Feed</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
 </head>
 
 <body class = "feed-body">
@@ -20,7 +22,7 @@
   <select class="dropdown" id="categoryFilter">
     <option value="">All</option>
     <option value="General">General</option>
-    <option value="event">Events</option>
+    <option value="Events">Events</option>
     <option value="Announcements">Announcements</option>
   </select>
   <select class="dropdown" id="sortFilter">
@@ -29,6 +31,11 @@
     <option value="replied">Most Replied</option>
     <option value="events">Upcoming Events</option>
   </select>
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search posts..." 
+  />
     </div>
     <!--javascript function, button to navigate to the home page -->
     <button class="home-button none" onclick="goHome()">
