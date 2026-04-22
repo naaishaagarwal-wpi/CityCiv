@@ -34,7 +34,7 @@ if (loginBtn) {
     if (error) {
       message.textContent = error.message;
     } else {
-      window.location.href = "/feed.html";
+      window.location.href = "/home.html";
     }
   });
 }
