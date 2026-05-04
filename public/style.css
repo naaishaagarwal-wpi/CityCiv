@@ -1,6 +1,4 @@
-/* CSS file for the CityCiv application */
-
-/* make sure there is no horizontal overflow */
+/* ================= GLOBAL ================= */
 html, body {
   overflow-x: hidden;
 }
@@ -12,100 +10,33 @@ body {
   color: #1a1a1a;
 }
 
-h1 {
+/* ================= HEADINGS ================= */
+h1, h2 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 12px;
   font-family: sans-serif;
 }
-/*phone responsiveness for h1 */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-}
-h2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
-  font-family: sans-serif;
-}
-@media (max-width: 600px) {
-  h2 {
-    font-size: 1.2rem;
-  }
-}
 
-/* Add some spacing and styling to the home page buttons */
-.home-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 200px;
-  margin: 0 auto;
-}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
 
-@media (max-width: 600px) {
-  .home-buttons {
-    width: 100%;
-    padding: 0 10px;
-  }
-}
-/* Add some spacing and styling to the town meeting page buttons */
+/* ================= BUTTON GROUPS ================= */
+.home-buttons,
 .meeting-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin: 0 auto;
 }
-@media (max-width: 600px) {
-  .meeting-buttons {
-    width: 100%;
-    padding: 0 10px;
-  }
-}
-/* Add some spacing and styling to the reply section */
-.reply-button {
-  background-color: #4b8fe8;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-@media (max-width: 600px) {
-  .reply-button {
-    font-size: 0.7rem;
-    padding: 3px 6px;
-  }
-}
-.reply-input {
-  padding: 4px 6px;
-  border: 1px solid #ccd0d5;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  flex: 1;
-  min-width: 120px;
+
+.home-buttons {
+  width: 200px;
 }
 
-@media (max-width: 600px) {
-  .reply-input {
-    font-size: 0.7rem;
-    padding: 3px 5px;
-  }
-}
-/* Add some spacing and styling to the actual replies under posts */
-.reply{
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Add some styling to the big buttons on the home page */
-.bigbutton{
+/* ================= BUTTONS ================= */
+.bigbutton {
   color: #fff;
   font-weight: bold;
   border: none;
@@ -114,18 +45,26 @@ h2 {
   border-radius: 10px;
 }
 
-@media (max-width: 600px) {
-  .home-buttons {
-    width: 100%;
-    padding: 0 10px;
-  }
-  .bigbutton {
-    width: 100%;
-    padding: 15px;
-    font-size: 1rem;
-  }
+.button {
+  cursor: pointer;
+  padding: 6px 10px;
+  border: 1px solid #4b8fe8;
+  background: #004aad;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
-/* Add some styling to the links on the town meeting page */
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ================= LINKS ================= */
+#meetings {
+  margin: 0 auto;
+  text-align: center;
+}
+
 #meetings a {
   color: white;
   display: block;
@@ -135,33 +74,22 @@ h2 {
   overflow-wrap: break-word;
   margin: 0 auto;
 }
-@media (max-width: 600px) {
-  #meetings a {
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-  }
-}
+
 #meetings a:visited {
   color: #abbdd2;
-}
-
-#meetings {
-  margin: 0 auto;
-  text-align: center;
 }
 
 #meetings div {
   width: fit-content;
   max-width: 100%;
   word-wrap: break-word;
-  overflow-wrap: break-word;
   margin: 10px auto;
 }
-/* Add the city image to the home page background */
-.home-body {
+
+/* ================= BACKGROUNDS ================= */
+.home-body,
+.index-body {
   background-color: #ffd493;
-  /* Fills any unfilled areas, including the top */
   background-image: url("public/uploads/images/CityCivbg.jpg");
   background-size: 100% auto;
   background-position: bottom center;
@@ -169,38 +97,12 @@ h2 {
   background-attachment: fixed;
   min-height: 90vh;
 }
-@media (max-width: 600px) {
-  .home-body {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-.index-body{
-  background-color: #ffd493;
-  /* Fills any unfilled areas, including the top */
-  background-image: url("public/uploads/images/CityCivbg.jpg");
-  background-size: 100% auto;
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 90vh;
-}
-@media (max-width: 600px) {
-  .index-body {
-    background-size: cover;
-    background-position: left center;
-  }
-}
+
 .feed-body {
   background-color: #ffd493;
 }
-@media (max-width: 600px) {
-  .feed-body {
-    background-size: cover;
-    background-position: left center;
-  }
-}
-/* Makes the posts on the feed page in columns*/
+
+/* ================= POSTS GRID ================= */
 #posts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -209,102 +111,48 @@ h2 {
   margin-top: 16px;
 }
 
-@media (max-width: 600px) {
-  #posts {
-    grid-template-columns: 1fr;
-    padding: 2px;
-  }
-}
-@media (max-width: 600px) {
-  #posts {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .post-card,
-  .post-card * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-}
-/* Add some spacing and styling to the feed header */
+/* ================= HEADER ================= */
 .feed-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  padding: 0 10px;
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffd493;
+  z-index: 1000;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  height: 100px;
 }
-@media (max-width: 600px) {
-  .feed-header {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-}
+
 .header-actions {
   display: flex;
   gap: 10px;
 }
-/* Add some styling to the button that takes you home */
-.home-button {
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-@media (max-width: 600px) {
-  .home-button {
-    top: 10px;
-    right: 10px;
-  }
-}
-.home-icon {
-  height: 8vh;
-}
 
-.none {
-  border: none;
-  background-color: transparent;
-}
-
-/* Add some styling to the post modal pop-up*/
-.post1 {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.post2 {
-  background: white;
-  padding: 20px;
-  margin: 100px auto;
-  width: 300px;
-}
-/* Add some styling to the posts on the feed page */
+/* ================= POST CARD ================= */
 .post-card {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   padding: 14px;
   border: 1px solid #e2e8f0;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
 }
 
+/* 🔥 THIS is what forces reply/footer to bottom */
+.post-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* ================= POST CONTENT ================= */
 .post-info {
   display: flex;
   justify-content: space-between;
@@ -314,22 +162,6 @@ h2 {
   padding: 10px 12px;
   border-radius: 10px 10px 0 0;
   margin: -14px -14px 10px -14px;
-}
-
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-}
-
-.post-category {
-  background: #4b8fe8;
-  color: #fff;
-  border-radius: 999px;
-  padding: 2px 10px;
-  font-size: 0.76rem;
 }
 
 .post-content {
@@ -343,73 +175,96 @@ h2 {
   max-height: 320px;
   object-fit: cover;
   border-radius: 8px;
-  margin: 10px 0px 60px 0px;
+  margin: 10px 0 60px 0;
 }
-/* Add some styling to the like and reply sections of the posts on the feed page */
+
 .post-likes {
   font-weight: bold;
   color: #4b8fe8;
-  margin: 0;
   font-size: 20px;
-}
-.post-heart{
-  font-size: 20px;
-}
-.post-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid #e2e8f0;
+  max-width: 20px;
+  float: left;
+
 }
 
-.reply-section {
+.post-heart {
+  font-size: 20px;
+  float: right;
+}
+
+.like-section {
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= REPLIES ================= */
+.reply-section,
+.reply {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.like-section {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-/*Standard styling for buttons across the site*/
-.button {
+.reply-button {
+  background-color: #4b8fe8;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 6px 10px;
-  border: 1px solid #4b8fe8;
-  border: 1px solid #4b8fe8;
-  background: #004aad;
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-/* Add some styling to the post modal pop-up form elements */
-#postModal textarea {
-  width: 94%;
-  height: 80px;
+.reply-input {
+  padding: 4px 6px;
   border: 1px solid #ccd0d5;
-  border-radius: 6px;
-  padding: 8px;
-  resize: vertical;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  flex: 1;
+  min-width: 60px;
+  max-width: 80px;
 }
 
-#postModal select,
-#postModal input[type=file] {
+/* ================= MISC ================= */
+.home-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.home-icon {
+  height: 8vh;
+}
+
+.none {
+  border: none;
+  background-color: transparent;
+}
+
+/* ================= MODAL ================= */
+.post1 {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-}
-/* Add some styling to the info on posts about events page */
-.event-details {
-  margin-bottom: 60px;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
 }
 
+.post2 {
+  background: white;
+  padding: 20px;
+  margin: 100px auto;
+  width: 300px;
+}
+
+/* ================= EVENT ================= */
 .event-details {
   margin-bottom: 60px;
 }
@@ -422,22 +277,11 @@ button:hover {
   color: #fff;
   border-radius: 10px;
   padding: 14px;
-  width:fit-content;
+  width: fit-content;
   max-width: 100%;
+}
 
-}
-/* Add some styling to the login page */
-.login-button {
-  display: flex;
-  cursor: pointer;
-  padding: 15px 15px;
-  background: #004aad;
-  border: none;
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  gap: 10px;
-}
+/* ================= LOGIN ================= */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -445,68 +289,80 @@ button:hover {
   gap: 10px;
   margin-bottom: 20px;
 }
+
+.login-button {
+  display: flex;
+  cursor: pointer;
+  padding: 15px;
+  background: #004aad;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+}
+
 .login-input {
   padding: 8px;
   border: 1px solid #ccd0d5;
   border-radius: 6px;
   font-size: 0.9rem;
   width: 20%;
-  margin-bottom: 10px;
-}
-/* Add some styling to the buttons on account page */
-.account-button {
-  display: flex;
-  cursor: pointer;
-  padding: 15px 15px;
-  background: #004aad;
-  border: none;
-  color: #fff;
 }
 
-.container { 
-  display: inline-flex;
-  position: relative;
-  justify-content: center; 
-  align-items: center; 
-  height: 200px; 
-  width: 300px;
-  margin: 0 10px 20px;
-  vertical-align: top;
-}
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
 
-.container:hover > .card {
-  cursor: pointer;
-  transform: rotateY(180deg);
-}
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
 
-.card {
-  width: 100%;
-  height: 100%;
-  perspective: 1000px; 
-  position: relative;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
+  .home-buttons,
+  .meeting-buttons {
+    width: 100%;
+    padding: 0 10px;
+  }
 
-.front, .back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
-}
+  .bigbutton {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+  }
 
-.front {
-  background-color: #fff;
-}
+  #posts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 70px 12px 20px;
+  }
 
-.back {
-  background-color: #f8f8f8;
-  transform: rotateY(180deg);
-}
+  .post-card {
+    width: 100%;
+    min-height: 60vh;
+  }
 
+  .post-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .reply-input {
+    width: 100%;
+    font-size: 0.7rem;
+    padding: 3px 5px;
+  }
+
+  .reply-button {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
+  .feed-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .home-button {
+    top: 10px;
+    right: 10px;
+  }
+}

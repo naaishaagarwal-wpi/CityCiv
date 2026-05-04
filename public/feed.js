@@ -1,25 +1,29 @@
 import { supabase } from "./supabaseClient.js";
 
+let userId = null;
 let username = null;
+const MAX_LENGTH = 150;
 
 //all supabase code was referenced from supabase api docs such as: https://supabase.com/docs/reference/javascript/auth-signinanonymously
 // Load user
 async function loadUser() {
   const { data: { session } } = await supabase.auth.getSession();
 
-  //resets back to sign in page if user did not sign in
-  //all window reset code learned from https://developer.mozilla.org/en-US/docs/Web/API/Window/location
   if (!session) {
     window.location = "/";
     return;
   }
 
-  username = session.user.email;
+  userId = session.user.id;
 
-  const nameDisplay = document.getElementById("nameDisplay");
-  if (nameDisplay) nameDisplay.textContent = username;
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("username")
+    .eq("id", userId)
+    .maybeSingle();
 
-  console.log("User:", username);
+  username = data?.username || "username";
+  document.getElementById("nameDisplay").textContent = username;
 }
 
 const categoryFilter = document.getElementById("categoryFilter");
@@ -64,11 +68,26 @@ async function getPosts() {
   .from("posts")
   .select(`
     *,
-    replies (*)
+    replies (*),
+    likes (user_id),
+    saved_posts (user_id)
   `);
 
-  // category filter
-  if (currentFilter) {
+  if (currentFilter === "mine") {
+    query = query.eq("user_id", userId);
+  
+  } else if (currentFilter === "saved") {
+    query = supabase
+      .from("posts")
+      .select(`
+        *,
+        replies (*),
+        likes (user_id),
+        saved_posts!inner (user_id)
+      `)
+      .eq("saved_posts.user_id", userId);
+  
+  } else if (currentFilter) {
     query = query.eq("category", currentFilter);
   }
 
@@ -82,10 +101,6 @@ async function getPosts() {
     query = query.order("inserted_at", { ascending: false });
   }
 
-  if (currentSort === "liked") {
-    query = query.order("likes", { ascending: false });
-  }
-
   const { data: posts, error } = await query;
 
   if (error) {
@@ -97,6 +112,12 @@ async function getPosts() {
   // frontend sorting
   let sortedPosts = [...posts];
 
+  if (currentSort === "liked") {
+    sortedPosts.sort((a, b) =>
+      (b.likes?.length || 0) - (a.likes?.length || 0)
+    );
+  }
+
   // most replied
   if (currentSort === "replied") {
     sortedPosts.sort((a, b) => {
@@ -104,25 +125,17 @@ async function getPosts() {
     });
   }
 
-  // upcoming events
-  if (currentSort === "events") {
-    sortedPosts = sortedPosts
-      .filter(p => {
-        return (
-          p.category === "Events" &&
-          p.event_date &&
-          new Date(p.event_date) >= new Date()
-        );
-      })
-      .sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
-  }
-
   //this creates the div for each post
   //https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting
   container.innerHTML = "";
 
   sortedPosts.forEach(post => {
-    const userLiked = post.likedBy?.includes(username);
+
+    const userLiked = post.likes?.some(like => like.user_id === userId);
+
+    const userSaved = post.saved_posts?.some(
+      save => save.user_id === userId
+    );
 
     const div = document.createElement("div");
     div.className = "post-card";
@@ -138,12 +151,22 @@ async function getPosts() {
         <strong>${post.username}</strong>
         <span class="post-category">${post.category || "General"}</span>
       </div>
-      <p>${post.content}</p>
+      <p class="post-content" id="content-${post.id}">
+        ${post.content.length > MAX_LENGTH 
+          ? post.content.slice(0, MAX_LENGTH) + "..." 
+          : post.content}
+      </p>
+
+      ${
+        post.content.length > MAX_LENGTH
+          ? `<button class="read-more-btn" data-id="${post.id}">Read more</button>`
+          : ""
+      }
       <div class="replies">
         ${repliesHTML}
       </div>
       ${
-        post.category === "event"
+        post.category === "Events"
           ? `
           <div class="event-details">
             <p class="event-info">📅 ${post.event_date || ""}</p>
@@ -160,84 +183,113 @@ async function getPosts() {
           <button class="reply-button" onclick="addReply('${post.id}')">Reply</button>
         </div>
         <div class="like-section">
-          <p class="post-likes"><span id="like-${post.id}">${post.likes || 0}</span></p>
+          <p class="post-likes"><span id="like-${post.id}">${post.likes?.length || 0}</span></p>
           <button class = "post-heart none" data-id="${post.id}">
             ${userLiked ? "❤️" : "🤍"}
           </button>
         </div>
+        <div class="save-section">
+          <button class="post-save reply-button" data-id="${post.id}">
+            ${userSaved ? "Saved" : "Save"}
+          </button>
+        </div>
       </div>
     `;
+
+    const readMoreBtn = div.querySelector(".read-more-btn");
+
+    if (readMoreBtn) {
+      let expanded = false;
+
+      readMoreBtn.addEventListener("click", () => {
+        const contentEl = div.querySelector(`#content-${post.id}`);
+
+        if (!expanded) {
+          contentEl.textContent = post.content;
+          readMoreBtn.textContent = "Show less";
+        } else {
+          contentEl.textContent = post.content.slice(0, MAX_LENGTH) + "...";
+          readMoreBtn.textContent = "Read more";
+        }
+
+        expanded = !expanded;
+      });
+    }
 
     // Like button event
     div.querySelector(".post-heart").addEventListener("click", () => {
       likePost(post.id);
     });
 
+    div.querySelector(".post-save").addEventListener("click", () => {
+      savePost(post.id);
+    });
+
     container.appendChild(div);
   });
 }
 
-// like post function
-async function likePost(postId) {
-  console.log("🟡 likePost called for postId:", postId, "username:", username);
+async function savePost(postId) {
+  const { data: existing } = await supabase
+    .from("saved_posts")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("post_id", postId)
+    .maybeSingle();
 
-  // Fetch the post with likedBy array and current likes count
-  const { data: post, error: fetchError } = await supabase
-    .from("posts")
-    .select("likedBy, likes")
-    .eq("id", postId)
-    .single();
-
-  if (fetchError) {
-    console.error("❌ Error fetching post for like:", fetchError);
-    return;
-  }
-
-  if (!post) {
-    console.warn("⚠️ No post found with id:", postId);
-    return;
-  }
-
-  console.log("📌 Post data fetched:", post);
-
-  // Copy current array & like count
-  let likedBy = post.likedBy || [];
-  let likes = post.likes || 0;
-
-  console.log("📊 Previous likedBy:", likedBy);
-  console.log("📊 Previous likes:", likes);
-
-  // If user has already liked
-  if (likedBy.includes(username)) {
-    console.log("🔁 User already liked — removing like");
-
-    // Remove user and decrease count
-    likedBy = likedBy.filter(u => u !== username);
-    likes = Math.max(0, likes - 1);
+  if (existing) {
+    // UNSAVE
+    await supabase
+      .from("saved_posts")
+      .delete()
+      .eq("user_id", userId)
+      .eq("post_id", postId);
   } else {
-    console.log("➕ User has not liked — adding like");
+    // SAVE
+    const { error } = await supabase
+      .from("saved_posts")
+      .insert({
+        user_id: userId,
+        post_id: postId
+      });
 
-    likedBy.push(username);
-    likes++;
+    if (error) {
+      console.error(error);
+    }
   }
 
-  console.log("📊 New likedBy:", likedBy);
-  console.log("📊 New likes:", likes);
+  getPosts();
+}
 
-  // Update the row in your posts table
-  const { error: updateError } = await supabase
-    .from("posts")
-    .update({ likedBy, likes })
-    .eq("id", postId);
+async function likePost(postId) {
+  const { data: existing } = await supabase
+    .from("likes")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("post_id", postId)
+    .maybeSingle(); // FIXED
 
-  if (updateError) {
-    console.error("❌ Error updating like:", updateError);
-    return;
+  if (existing) {
+    // UNLIKE
+    await supabase
+      .from("likes")
+      .delete()
+      .eq("user_id", userId)
+      .eq("post_id", postId);
+  } else {
+    // LIKE
+    const { error } = await supabase
+      .from("likes")
+      .insert({
+        user_id: userId,
+        post_id: postId
+      });
+
+    if (error) {
+      console.error(error); // good debugging
+    }
   }
 
-  console.log("✅ Like update successful for postId:", postId);
-
-  // Refresh the feed
   getPosts();
 }
 
@@ -263,7 +315,7 @@ const categoryInput = document.getElementById("categoryInput");
 const eventFields = document.getElementById("eventFields");
 if (categoryInput && eventFields) {
   const toggleEventFields = () => {
-    if (categoryInput.value === "event") {
+    if (categoryInput.value === "Events") {
       eventFields.style.display = "block";
     } else {
       eventFields.style.display = "none";
@@ -316,17 +368,15 @@ async function submitPost() {
 
   const { error } = await supabase.from("posts").insert([
     {
-      username,
+      user_id: userId,
+      username: username,
       content,
       category,
-      likes: 0,
-      likedBy: [],
       image_url,
-  
-      event_date: category === "event" && eventDate ? eventDate : null,
-      event_time: category === "event" && eventTime ? eventTime : null,
-      event_location: category === "event" && eventLocation ? eventLocation : null,
-    },
+      event_date: category === "Events" ? eventDate : null,
+      event_time: category === "Events" ? eventTime : null,
+      event_location: category === "Events" ? eventLocation : null,
+    }
   ]);
 
   if (error) {
@@ -345,10 +395,10 @@ window.addReply = async function(postId) {
 
   if (!content) return;
 
-  const { error } = await supabase.from("replies").insert({
+  await supabase.from("replies").insert({
     post_id: postId,
-    content,
-    username // optional if you store it
+    user_id: userId,
+    content
   });
 
   if (error) {

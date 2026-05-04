@@ -13,8 +13,6 @@
 
   <div class="feed-header">
     <div class="header-actions">
-      <!--button for signing out of the app-->
-      <button class="button" id="signOutBtn">⬅️ Sign Out</button>
       <!--button for creating and adding posts to the feed-->
       <button id="openPostBtn" class="button">➕ Create</button>
 
@@ -24,12 +22,13 @@
     <option value="General">General</option>
     <option value="Events">Events</option>
     <option value="Announcements">Announcements</option>
+    <option value="saved">Saved Posts</option>
+    <option value="mine">My Posts</option>
   </select>
   <select class="dropdown" id="sortFilter">
     <option value="latest">Latest</option>
     <option value="liked">Most Liked</option>
     <option value="replied">Most Replied</option>
-    <option value="events">Upcoming Events</option>
   </select>
   <input 
     type="text" 
@@ -58,7 +57,7 @@
 
       <select class="dropdown" id="categoryInput">
         <option value="General">General</option>
-        <option value="event">Events</option>
+        <option value="Events">Events</option>
         <option value="Announcements">Announcements</option>
       </select>
 
