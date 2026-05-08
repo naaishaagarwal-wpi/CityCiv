@@ -14,13 +14,17 @@
 <!-- Signup/Login Form for user authentication -->
 <h2>Signup/Login</h2>
 <div class="login-container">
-<input class="login-input" type="email" id="email" placeholder="Email" />
-<input class="login-input" type="password" id="password" placeholder="Password" />
-<button class="login-button" id="login">Login</button>
-<br>
-<button class="login-button" id="signup">Sign Up</button>
+  <input class="login-input" type="email" id="email" placeholder="Email" />
+  <input class="login-input" type="password" id="password" placeholder="Password" />
 
-<!--<button class="login-button" id="google">Login with Google</button>-->
+  <div id="signupFields" class="hidden" style="display: none;">
+    <input class="login-input" type="text" id="username" placeholder="Username" />
+    <input class="login-input" type="text" id="full_name" placeholder="Full Name" />
+  </div>
+
+  <button class="login-button" id="login">Login</button>
+  <br>
+  <button class="login-button" id="signup">Sign Up</button>
 </div>
 <p id="message"></p>
 

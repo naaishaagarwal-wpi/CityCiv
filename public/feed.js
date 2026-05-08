@@ -4,6 +4,21 @@ let userId = null;
 let username = null;
 const MAX_LENGTH = 150;
 
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const headerMenu = document.getElementById("headerMenu");
+
+if (hamburgerBtn) {
+  hamburgerBtn.addEventListener("click", () => {
+    headerMenu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!headerMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      headerMenu.classList.remove("active");
+    }
+  });
+}
+
 //all supabase code was referenced from supabase api docs such as: https://supabase.com/docs/reference/javascript/auth-signinanonymously
 // Load user
 async function loadUser() {
@@ -301,6 +316,9 @@ const modal = document.getElementById("postModal");
 if (openBtn) {
   openBtn.addEventListener("click", () => {
     modal.style.display = "block";
+    if (window.innerWidth <= 600 && headerMenu) {
+      headerMenu.classList.remove("active");
+    }
   });
 }
 

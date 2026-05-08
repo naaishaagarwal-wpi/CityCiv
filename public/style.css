@@ -281,17 +281,31 @@ button:hover {
   max-width: 100%;
 }
 
-/* ================= LOGIN ================= */
+/* Login */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 340px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+#signupFields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .login-button {
   display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
   cursor: pointer;
   padding: 15px;
   background: #004aad;
@@ -301,12 +315,29 @@ button:hover {
 }
 
 .login-input {
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ccd0d5;
   border-radius: 6px;
-  font-size: 0.9rem;
-  width: 20%;
+  font-size: 0.95rem;
+  width: 100%;
+  max-width: 340px;
+  box-sizing: border-box;
 }
+
+.hidden {
+  display: none;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
 
 /* ================= MOBILE ================= */
 @media (max-width: 600px) {
@@ -318,10 +349,11 @@ button:hover {
   .meeting-buttons {
     width: 100%;
     padding: 0 10px;
+    align-items: center;
   }
 
   .bigbutton {
-    width: 100%;
+    width: 80%;
     padding: 15px;
     font-size: 1rem;
   }
@@ -331,17 +363,20 @@ button:hover {
     flex-direction: column;
     gap: 16px;
     padding: 70px 12px 20px;
+    align-items: center;
   }
 
   .post-card {
-    width: 100%;
-    min-height: 60vh;
+    width: 85%;
+    min-height: unset;
   }
 
   .post-footer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .reply-input {
@@ -365,7 +400,65 @@ button:hover {
     top: 10px;
     right: 10px;
   }
+
+  .feed-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Show when active */
+  #headerMenu.active {
+    display: flex;
+  }
+
+  .header-actions {
+    flex-direction: column;
+  }
+
+  #headerMenu {
+    position: absolute;
+    top: 100px;
+  
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* 👈 start slightly up */
+  
+    opacity: 0;
+    pointer-events: none;
+  
+    background: #ffd493;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    z-index: 999;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  
+    transition: all 0.25s ease; /* 👈 THIS is required */
+  }
+
+  #headerMenu.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* 👈 moves down */
+    pointer-events: auto;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto 16px;
+    max-width: 320px;
+    height: 200px;
+  }
 }
+
 
 .container { 
   display: inline-flex;

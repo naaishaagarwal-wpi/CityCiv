@@ -12,34 +12,36 @@
 <body class = "feed-body">
 
   <div class="feed-header">
-    <div class="header-actions">
-      <!--button for creating and adding posts to the feed-->
-      <button id="openPostBtn" class="button">➕ Create</button>
 
-    <!--dropdown filters for sorting and categorizing posts in the feed-->
-  <select class="dropdown" id="categoryFilter">
-    <option value="">All</option>
-    <option value="General">General</option>
-    <option value="Events">Events</option>
-    <option value="Announcements">Announcements</option>
-    <option value="saved">Saved Posts</option>
-    <option value="mine">My Posts</option>
-  </select>
-  <select class="dropdown" id="sortFilter">
-    <option value="latest">Latest</option>
-    <option value="liked">Most Liked</option>
-    <option value="replied">Most Replied</option>
-  </select>
-  <input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Search posts..." 
-  />
+    <!-- Hamburger button (only visible on mobile) -->
+    <button id="hamburgerBtn" class="hamburger">☰</button>
+  
+    <!-- Wrap all controls in a menu -->
+    <div class="header-actions" id="headerMenu">
+      <button id="openPostBtn" class="button">➕ Create</button>
+  
+      <select class="dropdown" id="categoryFilter">
+        <option value="">All</option>
+        <option value="General">General</option>
+        <option value="Events">Events</option>
+        <option value="Announcements">Announcements</option>
+        <option value="saved">Saved Posts</option>
+        <option value="mine">My Posts</option>
+      </select>
+  
+      <select class="dropdown" id="sortFilter">
+        <option value="latest">Latest</option>
+        <option value="liked">Most Liked</option>
+        <option value="replied">Most Replied</option>
+      </select>
+  
+      <input type="text" id="searchInput" placeholder="Search posts..." />
     </div>
-    <!--javascript function, button to navigate to the home page -->
+  
     <button class="home-button none" onclick="goHome()">
-      <img src="public/uploads/images/home-button.png" alt="Home Button" class="home-icon">
+      <img src="public/uploads/images/home-button.png" class="home-icon">
     </button>
+  
   </div>
 
   <h1>Welcome&nbsp;<span id="nameDisplay"></span></h1>
