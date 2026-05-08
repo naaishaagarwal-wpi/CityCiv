@@ -26,6 +26,8 @@ function goHome() {
   window.location = "/home.html";
 }
 
+//this website helped me set up pwa and install button functionality: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
+
 window.addEventListener("DOMContentLoaded", () => {
   let deferredPrompt;
 
@@ -35,9 +37,6 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Install button not found");
     return;
   }
-
-  // Hide initially (important for UX)
-  //installBtn.style.display = "none";
 
   // Listen for install availability
   window.addEventListener("beforeinstallprompt", (e) => {

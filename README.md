@@ -13,3 +13,8 @@ Once you open the app, you will enter our login/sign up page. You should enter a
 The MVP page is the Dashboard and the rest are part of our extensions. You can create a post with the add post button and when you create a post, the post will be added to the database on Supabase. You can also like/unlike and reply to posts. 
 
 You can also view our app live hosted at this URL: https://city-civ-nvbz.vercel.app/
+
+Citations:
+- all specific code citations have been put with the code
+- as a general note, ChatGPT (https://chatgpt.com/) was used to help understand certain concepts (Supabase, PWA) and to help find websites that may contain helpful information on how to set up certain functionalities. It also helped with identifying what functionality to use for a certain idea, for example, PWA, sorting, or more.
+- Also, all PWA files (manifest.json, vercel.json, service-worker.js, etc) were put together with the help of this website: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps and ChatGPT (https://chatgpt.com/)

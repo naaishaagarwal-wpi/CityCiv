@@ -1,3 +1,5 @@
+//supabase auth documentation helped with the development of this file: https://supabase.com/docs/guides/auth
+
 import { supabase } from "./supabaseClient.js";
 
 const emailInput = document.getElementById("email");

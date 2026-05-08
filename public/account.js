@@ -1,5 +1,7 @@
 import { supabase } from "./supabaseClient.js";
 
+/*this website helped me understand authentication and how to set it up for supabase: https://supabase.com/docs/reference/javascript/auth-getsession*/
+
 let userId = null;
 
 /* =========================

@@ -141,7 +141,6 @@ button:hover {
   min-height: 100px;
 }
 
-/* 🔥 THIS is what forces reply/footer to bottom */
 .post-footer {
   margin-top: auto;
   display: flex;
@@ -328,6 +327,8 @@ button:hover {
   display: none;
 }
 
+/*this website helped me set up the hamburger code (css, html, js) https://www.w3schools.com/howto/howto_js_mobile_navbar.asp*/
+
 /* Hamburger button */
 .hamburger {
   display: none;
@@ -427,6 +428,8 @@ button:hover {
   
     width: 80%;
     left: 50%;
+
+    /*this website helped me with the transform css property https://www.w3schools.com/cssref/css3_pr_transform.php*/
     transform: translateX(-50%) translateY(-10px); /* 👈 start slightly up */
   
     opacity: 0;
@@ -438,14 +441,16 @@ button:hover {
     padding: 10px;
     z-index: 999;
     border-radius: 10px;
+
+    /*this website helped me with the css box shadow: https://www.w3schools.com/css/css3_shadows_box.asp*/
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  
-    transition: all 0.25s ease; /* 👈 THIS is required */
+    /*this website helped me with the css transition: https://www.w3schools.com/css/css3_transitions.asp*/
+    transition: all 0.25s ease;
   }
 
   #headerMenu.active {
     opacity: 1;
-    transform: translateX(-50%) translateY(0); /* 👈 moves down */
+    transform: translateX(-50%) translateY(0);
     pointer-events: auto;
   }
 

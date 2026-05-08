@@ -1,3 +1,13 @@
+// All Supabase authentication and database operations are based on these website info
+// https://supabase.com/docs/reference/javascript/auth-getsession
+// https://supabase.com/docs/reference/javascript/select
+// https://supabase.com/docs/reference/javascript/insert
+// https://supabase.com/docs/reference/javascript/storage-from-upload
+
+// Filtering and sorting logic
+// https://postgrest.org/en/stable/api.html#horizontal-filtering-rows
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
 import { supabase } from "./supabaseClient.js";
 
 let userId = null;
@@ -6,6 +16,8 @@ const MAX_LENGTH = 150;
 
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const headerMenu = document.getElementById("headerMenu");
+
+//this website helped me with the click outside of hamburger menu code below: https://stackoverflow.com/questions/44702271/how-to-get-hamburger-menu-to-close-by-clicking-outside-of-it?utm_source=chatgpt.com
 
 if (hamburgerBtn) {
   hamburgerBtn.addEventListener("click", () => {
@@ -309,6 +321,7 @@ async function likePost(postId) {
 }
 
 //this is the function for the modal that creates the pop up when pressing create post button
+//this website helped me with the postModal https://www.w3schools.com/howto/howto_css_modals.asp
 
 const openBtn = document.getElementById("openPostBtn");
 const modal = document.getElementById("postModal");
