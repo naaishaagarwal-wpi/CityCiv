@@ -10,22 +10,22 @@ const signupFields = document.getElementById("signupFields");
 const message = document.getElementById("message");
 let signupMode = false;
 
-// SIGN UP
 const signupBtn = document.getElementById("signup");
+
+// SIGN UP
 if (signupBtn) {
   signupBtn.addEventListener("click", async () => {
-    if (!signupMode) {
-      signupFields.classList.remove("hidden");
-      signupBtn.textContent = "Submit Sign Up";
-      message.textContent = "Enter email, password, username, and full name, then click Sign Up again.";
-      signupMode = true;
-      return;
-    }
 
     const email = emailInput.value;
     const password = passwordInput.value;
     const username = usernameInput.value;
     const full_name = fullNameInput.value;
+
+    // basic validation
+    if (!email || !password || !username || !full_name) {
+      message.textContent = "Please fill out all fields.";
+      return;
+    }
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -44,7 +44,8 @@ if (signupBtn) {
     if (error) {
       message.textContent = error.message;
     } else {
-      message.textContent = "Check your email!";
+      message.textContent =
+        window.location.href = "/home.html";
     }
   });
 }
