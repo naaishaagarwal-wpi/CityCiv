@@ -6,13 +6,12 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const usernameInput = document.getElementById("username");
 const fullNameInput = document.getElementById("full_name");
-const signupFields = document.getElementById("signupFields");
-const message = document.getElementById("message");
-let signupMode = false;
 
-const signupBtn = document.getElementById("signup");
+const message = document.getElementById("message");
 
 // SIGN UP
+const signupBtn = document.getElementById("signup");
+
 if (signupBtn) {
   signupBtn.addEventListener("click", async () => {
 
@@ -21,32 +20,55 @@ if (signupBtn) {
     const username = usernameInput.value;
     const full_name = fullNameInput.value;
 
-    // basic validation
+    // validation
     if (!email || !password || !username || !full_name) {
       message.textContent = "Please fill out all fields.";
       return;
     }
 
+    // create auth user
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username: username,
-          full_name: full_name,
+          username,
+          full_name,
         },
       },
     });
 
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
+    console.log("SIGNUP DATA:", data);
+    console.log("SIGNUP ERROR:", error);
 
     if (error) {
       message.textContent = error.message;
-    } else {
-      message.textContent =
-        window.location.href = "/home.html";
+      return;
     }
+
+    const user = data.user;
+
+    // insert into profiles table
+    if (user) {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .upsert([
+          {
+            id: user.id,
+            username: username,
+            full_name: full_name,
+          },
+        ]);
+
+      console.log("PROFILE ERROR:", profileError);
+
+      if (profileError) {
+        message.textContent = profileError.message;
+        return;
+      }
+    }
+
+    window.location.href = "/home.html";
   });
 }
 
@@ -54,13 +76,6 @@ if (signupBtn) {
 const loginBtn = document.getElementById("login");
 if (loginBtn) {
   loginBtn.addEventListener("click", async () => {
-    if (signupMode) {
-      signupFields.classList.add("hidden");
-      signupBtn.textContent = "Sign Up";
-      message.textContent = "";
-      signupMode = false;
-    }
-
     const { error } = await supabase.auth.signInWithPassword({
       email: emailInput.value,
       password: passwordInput.value,
